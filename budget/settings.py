@@ -153,6 +153,6 @@ ADMINS = [
     ('Yura 3', 'peskov.yuriy.l@gmail.com'),
 ]
 
-# DJANGO_SOFTDELETE_SETTINGS = {
-#     'cascade': True,
-# }
+DJANGO_SOFTDELETE_SETTINGS = {
+    'cascade': True,
+}
