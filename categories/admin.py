@@ -8,7 +8,7 @@ from categories.models import Category, UserCategory
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'parent', 'type', 'is_deleted', 'created_at', 'updated_at']
-    list_filter = [('parent__name', MultiSelectDropdownFilter), 'is_deleted', 'created_at', 'updated_at']
+    list_filter = [('parent__name', MultiSelectDropdownFilter), 'type', 'is_deleted', 'created_at', 'updated_at']
 
     def delete_queryset(self, request, queryset):
         for obj in queryset:

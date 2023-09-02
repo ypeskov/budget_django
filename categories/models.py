@@ -11,8 +11,7 @@ class Category(BaseModel):
                                verbose_name='parent',
                                null=True, blank=True)
 
-    type = models.CharField(max_length=10,
-                            choices=[('income', 'Income'), ('expense', 'Expense'), ('transfer', 'Transfer')])
+    type = models.CharField(max_length=10, choices=[('income', 'Income'), ('expense', 'Expense')])
 
     def __str__(self):
         parent_name = f' ({self.parent})' if self.parent else ''
