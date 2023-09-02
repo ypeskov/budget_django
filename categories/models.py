@@ -5,8 +5,12 @@ from budget.models import BaseModel
 
 
 class Category(BaseModel):
-    name = models.CharField(max_length=255)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='children', null=True, blank=True)
+    name = models.CharField(max_length=255, verbose_name='Category')
+
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='children',
+                               verbose_name='parent',
+                               null=True, blank=True)
+
     type = models.CharField(max_length=10,
                             choices=[('income', 'Income'), ('expense', 'Expense'), ('transfer', 'Transfer')])
 
