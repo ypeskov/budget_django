@@ -19,8 +19,15 @@ class AccountAdmin(admin.ModelAdmin):
                    'is_deleted',
                    'created_at', 'updated_at']
 
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            obj.delete()
+
 
 @admin.register(CreditCard)
 class CreditCardAdmin(admin.ModelAdmin):
-    list_display = ['account', 'limit', 'due_date', 'created_at', 'updated_at']
-    list_filter = ['account', 'limit', 'due_date',  'created_at', 'updated_at']
+    list_display = ['account', 'limit', 'due_date',
+                    'is_deleted',
+                    'created_at', 'updated_at']
+    list_filter = ['account', 'limit', 'due_date',
+                   'created_at', 'updated_at']
