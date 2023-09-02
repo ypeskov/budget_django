@@ -11,9 +11,11 @@ class AccountTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ['name', 'currency', 'balance', 'type', 'open_date', 'valid_till',
+    list_display = ['name', 'currency', 'balance', 'type', 'open_date',
+                    'valid_till',
                     'credit_card', 'created_at', 'updated_at']
-    list_filter = ['currency', 'type', 'open_date', 'valid_till',
+    list_filter = ['currency', 'type', 'open_date',
+                   'valid_till',
                    'credit_card', 'created_at', 'updated_at']
 
 

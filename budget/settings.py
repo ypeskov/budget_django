@@ -152,3 +152,7 @@ ADMINS = [
     ('Yura 2', 'yuriy.peskov@hotmail.com'),
     ('Yura 3', 'peskov.yuriy.l@gmail.com'),
 ]
+
+# DJANGO_SOFTDELETE_SETTINGS = {
+#     'cascade': True,
+# }
