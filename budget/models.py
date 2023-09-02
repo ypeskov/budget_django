@@ -11,12 +11,26 @@ def get_settings():
     return getattr(settings, 'DJANGO_SOFTDELETE_SETTINGS', default_settings)
 
 
+class NotDeletedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_deleted=False)
+
+
+class DeletedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_deleted=True)
+
+
 class BaseModel(models.Model):
     is_deleted = models.BooleanField(default=False)
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = models.Manager()
+    not_deleted_objects = NotDeletedManager()
+    deleted_objects = DeletedManager()
 
     class Meta:
         abstract = True
