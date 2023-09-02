@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static "styles/common.css" %}" rel="stylesheet">
+</head>
+<body>
+<div id="header">
+    <span class="logo">Budgeter</span>
+    {% if request.user.is_authenticated %}
+        <p>Menu here</p>
+    {% endif %}
+    <span class="user">
+        {% if request.user.is_authenticated %}
+        Hello {{ request.user.first_name|default:request.user.username }},
+        <a href="{% url "profiles:logout" %}">Logout</a>
+        {% else %}
+        <a href="{% url "profiles:login" %}">Log in</a>
+        {% endif %}
+    </span>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">
+          {{ message|safe }}
+          <a href="#" class="close">x</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  </div>
+  <div id="content">
+    {% block main_content %}
+    {% endblock %}
+  </div>
+</body>
+</html>

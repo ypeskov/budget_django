@@ -1,0 +1,18 @@
+{% extends 'base_layout.html' %}
+
+{% block main_content %}
+    {% if request.user.is_authenticated %}
+        <div>{{ request.user.profile.date_of_birth }}</div>
+        <ul class="menu">
+            <li {% if section == "dashboard" %}class="selected"{% endif %}>
+                <a href="{% url "profiles:dashboard" %}">My dashboard</a>
+            </li>
+            <li {% if section == "images" %}class="selected"{% endif %}>
+                <a href="#">Images</a>
+            </li>
+            <li {% if section == "people" %}class="selected"{% endif %}>
+                <a href="#">People</a>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}
