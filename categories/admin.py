@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from more_admin_filters import DropdownFilter, MultiSelectDropdownFilter
+from more_admin_filters import MultiSelectDropdownFilter
 
 from categories.models import Category, UserCategory
 
@@ -18,5 +18,4 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(UserCategory)
 class UserCategoryAdmin(CategoryAdmin):
     list_display = CategoryAdmin.list_display + ['user']
-    list_filter = CategoryAdmin.list_filter
-    print(list_display)
+    list_filter = CategoryAdmin.list_filter + [('user__username', MultiSelectDropdownFilter)]

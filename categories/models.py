@@ -24,10 +24,10 @@ class Category(BaseModel):
 
 class UserCategory(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_categories')
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255, verbose_name='Category')
     parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='children', null=True, blank=True)
     type = models.CharField(max_length=10,
-                            choices=[('income', 'Income'), ('expense', 'Expense'), ('transfer', 'Transfer')])
+                            choices=[('income', 'Income'), ('expense', 'Expense')])
 
     def __str__(self):
         parent_name = f' ({self.parent})' if self.parent else ''
