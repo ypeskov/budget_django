@@ -5,15 +5,21 @@ from .models import AccountType, Account, CreditCard
 
 @admin.register(AccountType)
 class AccountTypeAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description', 'created_at', 'updated_at']
-    list_filter = ['name', 'created_at', 'updated_at']
+    list_display = ['name', 'description', 'is_deleted', 'created_at', 'updated_at']
+    list_filter = ['name', 'is_deleted', 'created_at', 'updated_at']
+
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            obj.delete()
 
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
     list_display = ['name', 'currency', 'balance', 'type', 'open_date',
                     'valid_till',
-                    'credit_card', 'is_deleted', 'created_at', 'updated_at']
+                    'credit_card',
+                    'is_deleted',
+                    'created_at', 'updated_at']
     list_filter = ['currency', 'type', 'open_date',
                    'valid_till',
                    'is_deleted',
@@ -30,4 +36,9 @@ class CreditCardAdmin(admin.ModelAdmin):
                     'is_deleted',
                     'created_at', 'updated_at']
     list_filter = ['account', 'limit', 'due_date',
+                   'is_deleted',
                    'created_at', 'updated_at']
+
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            obj.delete()
