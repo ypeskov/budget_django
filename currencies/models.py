@@ -24,7 +24,7 @@ class ExchangeRateCurrent(BaseModel):
     rate_sell = models.DecimalField(max_digits=16, decimal_places=6)
 
     def __str__(self):
-        return f'{self.currency1}:{self.currency2}'
+        return f'{self.currency1}:{self.currency2} {self.rate_buy}:{self.rate_sell}'
 
     class Meta:
         verbose_name = 'current exchange rates'
@@ -37,3 +37,6 @@ class ExchangeRateHistory(ExchangeRateCurrent):
     class Meta:
         verbose_name = 'history of exchange rates'
         verbose_name_plural = 'history of exchange rates'
+
+    def __str__(self):
+        return f'{super().__str__()} on {self.rate_date}'
