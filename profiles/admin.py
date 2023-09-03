@@ -6,6 +6,6 @@ from .models import Profile
 
 @admin.register(Profile)
 class ProfileAdmin(BaseAdmin):
-    list_display = ['user', 'is_deleted', 'date_of_birth']
+    list_display = ['user', 'base_currency', 'date_of_birth', 'is_deleted']
     raw_id_fields = ['user']
-    list_filter = ['user']
+    list_filter = ['user', 'date_of_birth']

@@ -1,3 +1,5 @@
+from django.utils.timezone import now
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -21,9 +23,10 @@ class Operation(BaseModel):
     type = models.CharField(max_length=20, choices=OPERATION_TYPES, default=EXPENSE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='operations')
     category = models.ForeignKey(UserCategory, on_delete=models.CASCADE, related_name='operations')
-    amount = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='amount')
-    op_date = models.DateTimeField(auto_now_add=True)
+    amount = models.DecimalField(max_digits=16, decimal_places=2, verbose_name='amount')
+    op_date = models.DateTimeField(verbose_name='operation date', default=now)
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
+    exchange_rate = models.DecimalField(decimal_places=6, max_digits=16)
     source_account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='source_accounts')
     destination_account = models.ForeignKey(Account, on_delete=models.CASCADE,
                                             related_name='destination_accounts', blank=True, null=True)

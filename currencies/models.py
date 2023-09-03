@@ -15,3 +15,25 @@ class Currency(BaseModel):
 
     def __str__(self):
         return self.code
+
+
+class ExchangeRateCurrent(BaseModel):
+    currency1 = models.ForeignKey(Currency, related_name='sold_currency', on_delete=models.PROTECT)
+    currency2 = models.ForeignKey(Currency, related_name='bought_currency', on_delete=models.PROTECT)
+    rate_buy = models.DecimalField(max_digits=16, decimal_places=6)
+    rate_sell = models.DecimalField(max_digits=16, decimal_places=6)
+
+    def __str__(self):
+        return f'{self.currency1}:{self.currency2}'
+
+    class Meta:
+        verbose_name = 'current exchange rates'
+        verbose_name_plural = 'current exchange rates'
+
+
+class ExchangeRateHistory(ExchangeRateCurrent):
+    rate_date = models.DateTimeField()
+
+    class Meta:
+        verbose_name = 'history of exchange rates'
+        verbose_name_plural = 'history of exchange rates'
