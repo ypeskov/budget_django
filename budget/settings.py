@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'currencies',
     'accounts',
     'categories',
+    'operations',
 ]
 
 MIDDLEWARE = [

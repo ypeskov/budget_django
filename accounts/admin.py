@@ -1,20 +1,17 @@
 from django.contrib import admin
 
+from budget.admin_base import BaseAdmin
 from .models import AccountType, Account, CreditCard
 
 
 @admin.register(AccountType)
-class AccountTypeAdmin(admin.ModelAdmin):
+class AccountTypeAdmin(BaseAdmin):
     list_display = ['name', 'description', 'is_deleted', 'created_at', 'updated_at']
     list_filter = ['name', 'is_deleted', 'created_at', 'updated_at']
 
-    def delete_queryset(self, request, queryset):
-        for obj in queryset:
-            obj.delete()
-
 
 @admin.register(Account)
-class AccountAdmin(admin.ModelAdmin):
+class AccountAdmin(BaseAdmin):
     list_display = ['name', 'currency', 'balance', 'type', 'open_date',
                     'valid_till',
                     'credit_card',
@@ -25,20 +22,12 @@ class AccountAdmin(admin.ModelAdmin):
                    'is_deleted',
                    'created_at', 'updated_at']
 
-    def delete_queryset(self, request, queryset):
-        for obj in queryset:
-            obj.delete()
-
 
 @admin.register(CreditCard)
-class CreditCardAdmin(admin.ModelAdmin):
+class CreditCardAdmin(BaseAdmin):
     list_display = ['account', 'limit', 'due_date',
                     'is_deleted',
                     'created_at', 'updated_at']
     list_filter = ['account', 'limit', 'due_date',
                    'is_deleted',
                    'created_at', 'updated_at']
-
-    def delete_queryset(self, request, queryset):
-        for obj in queryset:
-            obj.delete()
